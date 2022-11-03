@@ -25,6 +25,18 @@ services:
         depends_on:
             - mysql
             - redis
+
+    setup:
+      image: badaso
+      depends_on:
+        - badaso
+      volumes:
+        - .:/var/www/html
+      restart: "no"
+      entrypoint: ["bash", "setup.sh"]
+      networks:
+        - sail
+
     mysql:
         image: 'mysql/mysql-server:8.0'
         ports:
